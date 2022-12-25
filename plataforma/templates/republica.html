@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'plataforma/css/home.css' %}">
+{% endblock  %}
+
+{% block 'body' %}
+
+    <div style="text-align: center" class="container">
+        <br>
+        <br>
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for foto in republica.fotos.all %}
+                    <div class="carousel-item {% if forloop.first %} active {% endif %}" >
+                        <img class="d-block w-100" src="{{foto}}" alt="First slide">
+                    </div>
+                {% endfor %}
+            </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+        <div class="row">
+            <div class="col-md">
+                <h3 class="titulo_especificacao">Valor</h3>
+                <p class="especificacao">R$ {{republica.valor}}</p>
+            </div>
+            <div class="col-md">
+                <h3 class="titulo_especificacao">Quant. de quartos</h3>
+                <p class="especificacao">{{republica.quantidade_de_quartos}}</p>
+            </div>
+            <div class="col-md">
+                <h3 class="titulo_especificacao">Quant. de banheiros</h3>
+                <p class="especificacao">{{republica.quantidade_de_banheiros}}</p>
+            </div>
+            <div class="col-md">
+                <h3 class="titulo_especificacao">Vagas garagem</h3>
+                <p class="especificacao">{{republica.quantidade_de_vagas_garagem }}</p>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div style="text-align: left">
+            <h3 class="titulo_especificacao">Endereço</h3>
+            <p class="especificacao_endereco">{{republica.rua}}, {{republica.cidade }}</p>
+        </div>
+        <br>
+        <div style="text-align: left">
+            <h3 class="titulo_especificacao">Telefone do proprietário</h3>
+            <p class="especificacao_endereco">{{republica.contato}}</p>
+        </div>      
+        <br>
+        <div style="text-align: left">
+            <h3 class="titulo_especificacao">Descricao</h3>
+            <p class="especificacao_endereco">{{republica.descricao}}</p>
+        </div>
+        <hr style="border: 1px solid black">
+        <br>
+        <div class="div_possivel_interesse">
+            <h3 class="titulo_especificacao">Talvez você se interesse por</h3>
+            
+            <div class="row">
+                {% for sugestao in sugestoes %}
+                    <div class="col-md cont">
+                        <div class="card_imovel">
+                            <img class="img_capa_imovel" src="{{sugestao.imagem1.url}}">
+                            <div class="informacoes_imoveis">
+                                <a class="a_none" href="{% url 'republica' republica.id %}"><h4 class="valor">R$ {{republica.valor}}</h4></a>
+
+                                <strong>{{republica.rua}} <br> {{republica.bairro}} <br>{{republica.cidade}}</strong>
+                                <br>
+                                <p><strong>Quartos: </strong> {{republica.quantidade_de_quartos}} <br>
+                                <strong>Banheiros: </strong>{{republica.quantidade_de_banheiros}}</p>
+                              </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+
+        
+        
+
+    </div>
+    
+
+{% endblock  %}

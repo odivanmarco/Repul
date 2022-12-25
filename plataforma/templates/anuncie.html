@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %}
+{% endblock %}
+
+{% block 'head' %}
+{% endblock %}
+
+
+{% block 'body' %}
+<h1 class="text-center">Anuncie</h1>
+<div class="container" id="formMensagem">
+    <form method="post" action="#" enctype="multipart/form-data">
+        {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <div class="form-group m-3">
+                <label>Upload de imagens</label>
+                <input required name="imagens" type="file" multiple class="form-control-file">
+            </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+{% endblock %}
