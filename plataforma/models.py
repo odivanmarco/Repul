@@ -1,13 +1,6 @@
 from django.db import models
 
 
-class Imagem(models.Model):
-    img = models.ImageField(upload_to='img')
-
-    def __str__(self) -> str:
-        return self.img.url
-
-
 class Republica(models.Model):
     nome_republica = models.CharField(max_length=100)
     cidade = models.CharField(max_length=100)
@@ -21,8 +14,12 @@ class Republica(models.Model):
     regras_da_republica = models.TextField(max_length=2000)
     contato = models.CharField(max_length=20)
     nome_do_anunciante = models.CharField(max_length=60)
-    fotos = models.ManyToManyField(Imagem)
     descricao = models.TextField(max_length=2000)
+    foto1 = models.ImageField(upload_to="img")
+    foto2 = models.ImageField(upload_to="img")
+    foto3 = models.ImageField(upload_to="img")
+    foto4 = models.ImageField(upload_to="img")
+    foto5 = models.ImageField(upload_to="img")
 
 
 class Contato(models.Model):

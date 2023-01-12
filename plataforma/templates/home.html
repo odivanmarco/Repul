@@ -31,7 +31,7 @@
           <a href="{% url 'republica' republica.id %}" class="a_none">
             <div class="col-md cont">
               <div class="card_republica">
-                <img class="img_capa_republica" src="{{republica.fotos.all.0.img.url}}">
+                <img class="img_capa_republica" src="{{republica.foto1.url}}">
                 <div class="informacoes_republicas">
                   <a class="a_none" href="{% url 'republica' republica.pk %}"><h4 class="valor">R$ {{republica.valor}}</h4></a>
                   <strong>{{republica.rua}} <br> {{republica.bairro}} <br>{{republica.cidade}}</strong>

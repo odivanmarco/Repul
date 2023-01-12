@@ -12,9 +12,9 @@
         <br>
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-                {% for foto in republica.fotos.all %}
+                {% for img in imagens %}
                     <div class="carousel-item {% if forloop.first %} active {% endif %}" >
-                        <img class="d-block w-100" src="{{foto}}" alt="First slide">
+                        <img class="d-block w-100" src="{{img}}" alt="First slide">
                     </div>
                 {% endfor %}
             </div>

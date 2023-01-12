@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Republica, Contato, Imagem
+from .models import Republica, Contato
 from.forms import RepublicaForms
 
 
@@ -45,15 +45,24 @@ def anuncie(request):
         form = RepublicaForms()
         return render(request, "anuncie.html", {'form': form})
     else:
-        form = RepublicaForms(request.POST)
+        form = RepublicaForms(request.POST,request.FILES)
         if form.is_valid():
             post = form.save()
             post.save()
-        return render(request, 'home.html')
+            republicas = Republica.objects.all
+            return render(request, 'home.html',{'republicas': republicas})
+        return render(request, 'anuncie.html')
+        
 
 
 def republica(request, id):
     republica = get_object_or_404(Republica, id=id)
     sugestoes = Republica.objects.filter(bairro=republica.cidade).exclude(id=id)[:2]
-    return render(request, 'republica.html', {'republica': republica, 'sugestoes': sugestoes, 'id': id})
+    imagens = []
+    imagens.append(republica.foto1.url)
+    imagens.append(republica.foto2.url)
+    imagens.append(republica.foto3.url)
+    imagens.append(republica.foto4.url)
+    imagens.append(republica.foto5.url)
+    return render(request, 'republica.html', {'republica': republica, 'sugestoes': sugestoes, 'id': id, 'imagens': imagens})
 

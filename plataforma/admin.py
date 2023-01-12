@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Republica, Imagem
+from .models import Republica
 # Register your models here.
 @admin.register(Republica)
 class republicaAdmin(admin.ModelAdmin):
@@ -7,5 +7,3 @@ class republicaAdmin(admin.ModelAdmin):
     list_editable = ('valor', 'contato')
     list_filter = ('bairro', 'valor')
 
-
-admin.site.register(Imagem)
