@@ -11,7 +11,7 @@
 {% block 'body' %}
 <h1 class="text-center">Anuncie</h1>
 <div class="container" id="formMensagem">
-    <form method="post" action="" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
             <table>
                 {{ form.as_table }}

@@ -1,13 +1,16 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponse
+from django.contrib.auth.decorators import login_required
 from .models import Republica, Contato
 from.forms import RepublicaForms
 
 
 # Create your views here.
+@login_required(login_url='/auth/logar/')
 def home(request):
     republicas = Republica.objects.all
     return render(request, 'home.html', {'republicas': republicas})
 
+@login_required(login_url='/auth/logar/')
 def pesquisar(request):
     pesquisa = request.POST.get('pesquisa')
     if Republica.objects.filter(bairro__icontains=pesquisa,):
@@ -20,11 +23,11 @@ def pesquisar(request):
         republicas = Republica.objects.all()
     return render(request, 'home.html', {'republicas': republicas})
 
-
+@login_required(login_url='/auth/logar/')
 def sobre(request):
     return render(request,'sobre.html')
 
-
+@login_required(login_url='/auth/logar/')
 def contato(request):
     if request.method == "GET":
         return render(request, 'contato.html')
@@ -39,7 +42,7 @@ def contato(request):
         mensagem = "Mensagem enviada com sucesso"
         return render(request,'contato.html',{'mensagem': mensagem})
 
-
+@login_required(login_url='/auth/logar/')
 def anuncie(request):
     if request.method == "GET":
         form = RepublicaForms()
@@ -51,10 +54,11 @@ def anuncie(request):
             post.save()
             republicas = Republica.objects.all
             return render(request, 'home.html',{'republicas': republicas})
+        if not form.is_valid():
+            return HttpResponse("Erro, form não válido")
         return render(request, 'anuncie.html')
         
-
-
+@login_required(login_url='/auth/logar/')
 def republica(request, id):
     republica = get_object_or_404(Republica, id=id)
     sugestoes = Republica.objects.filter(bairro=republica.cidade).exclude(id=id)[:2]
