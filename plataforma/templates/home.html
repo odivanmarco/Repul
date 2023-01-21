@@ -33,7 +33,10 @@
               <div class="card_republica">
                 <img class="img_capa_republica" src="{{republica.foto1.url}}">
                 <div class="informacoes_republicas">
-                  <a class="a_none" href="{% url 'republica' republica.pk %}"><h4 class="valor">R$ {{republica.valor}}</h4></a>
+                  <a class="a_none" href="{% url 'republica' republica.pk %}">
+                    <h4> <strong>{{republica.nome_republica}}</strong> </h4>
+                    <h4 class="valor">R$ {{republica.valor}}</h4>
+                  </a>
                   <strong>{{republica.rua}} <br> {{republica.bairro}} <br>{{republica.cidade}}</strong>
                   <br>
                   <p><strong>Quartos: </strong> {{republica.quantidade_de_quartos}} <br>
